@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Geovisor d'en Sullivan</title>	
+	
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+	  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+	 
+	 
+<style>
+
+
+.titulo {
+	color:white;
+	font-family:courier;
+	background-color:#509E41;
+	padding:10px;
+	position: relative;
+	left:10px;
+}
+
+.me {
+	color: #245A1B;
+	font-family:arial;
+	flex: 1;
+	background-color:#8FD981;
+	padding:10px;
+	margin-left:0px;
+	border-radius:12px;
+	border-color:#4FC23A;
+	 border: 4px solid;
+
+
+}
+
+.imatge  {
+	
+	width: 100px;
+	position : absolute;
+	left:30px;
+	top:30px;
+	z-index:10;
+}
+.imatge2  {
+	width: 100px;
+	position : absolute;
+	left:120px;
+	top:28px;
+	z-index:10;
+
+}
+
+.imatge3  {
+	width: 100px;
+	position : absolute;
+	left:230px;
+	top:28px;
+	z-index:10;
+
+}
+
+
+.contenido {
+    display: flex;           /* coloca texto y mapa en fila */
+    gap: 20px;               /* separación entre columnas */
+    padding: 20px;
+}
+
+.segunda {
+    width: 50%; /* ocupa la mitad del contenedor */
+    max-width: 700px; /* límite máximo */
+	margin-right: 10px;
+}
+
+#map {
+	width: 50%;
+	  border-radius: 12px;
+
+}
+
+.round3 {
+  border: 4px solid;
+  border-radius: 12px;
+  padding: 10px;
+  border-color:#4FC23A;
+}
+
+.pestañas {
+    width: 100px;
+	position : absolute;
+	right:120px;
+	top:38px;
+}
+
+.final {
+	bottom:0;
+	position: absolute;
+	left: 50%;
+	color: #000000;
+	padding:5px;
+}
+	
+.profile {
+	margin-left:20px;
+	position:relative;
+	padding:10px;
+	margin-right:1500px;
+	border-radius:12px;
+	}
+
+.button {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  	border-radius:12px;
+
+}
+
+/* Green */
+.success {
+  border-color: #04AA6D;
+  color: green;
+}
+
+.success:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: separate;
+  border-spacing:0px;
+  border-radius: 18px;
+  width: 100%;
+  border: 1px solid #364727;
+	
+
+}
+
+td, th {
+  border: 1px  #7CA653;
+  text-align: left;
+  padding: 14px;
+
+}
+
+tr:nth-child(even) {
+  background-color: #8FD981;
+
+}
+
+/* Redondear solo la última fila para que coincida con la tabla */
+tr:last-child td:first-child {
+  border-bottom-left-radius: 18px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius: 18px;
+}
+
+.button1 {
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  background-color: #0C3622;
+}
+
+
+	
+</style>
+
+
+   <head>
+         
+   </head>
+   <body>
+   <header>
+		<div>
+			<a href="https://qgis.org/">
+			<img class="imatge" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfgXDb9V9sYabHVZII_S90ol75nZmzWxG2iw&s">
+			</a>
+			<a href="https://www.esri.com/es-es/arcgis/products/arcgis-pro/overview">
+			<img class="imatge2" src= "https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_64636a5c446c22391d4ed719e0987cd2/arcgis-pro.png" style="width:95px">
+			</a>
+			<a href="https://www.python.org/">
+			<img class="imatge3" src= "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png" style="width:50px">
+			</a>
+			
+			<h1 class="round3" style="color:#245A1B; display: flex; align-items: center; justify-content: center; position: relative; padding: 10px 50px;">
+    
+				<!-- Botones a la izquierda dentro del h1 -->
+				<span style="position: absolute; right: 15px;  ">
+					  <button class="button1" onclick="openCity(event, 'About Me')" id="defaultOpen">About me</button>
+					  <button class="button1" onclick="openCity(event, 'Paris')">Linkedin</button>
+					  <button class="button1" onclick="openCity(event, 'Tokyo')">Table</button>
+				</span>
+				
+				<!-- Título centrado -->
+				Repositorio Sullivan
+			</h1>
+
+		</div>
+
+		
+	</header>
+	<main class="contenido">
+		<div class = "me">
+			<h1 class = "subtitulo">Benvinguts al repositori de plugins d'en Sullivan</h1>
+			<p>Aquí penjaré tots els meus plugins de Qgis, com també ArcGis o altres aplicacions que apareixin.
+			<h2>A continuación mis plugins:</h2>
+			<p>
+			<button class="button success" onclick="window.open('https://github.com/arnau2112/Caculadora_Velocidad_Tsunami_TFG', '_blank')">
+			  Calculadora velocidad Tsunami
+			</button></p>
+			<p>
+			<button class="button success" onclick="window.open('https://github.com/arnau2112/Visor_TFG_C-diz', '_blank')">
+			  Visor TFG 
+			</button></p>
+			<p>
+			<button class="button success" onclick="window.open('https://github.com/arnau2112/Plugin-Add-Photos-QGIS', '_blank')">
+			  Add Photos Qgis
+			</button></p>
+		</div>
+		<div id="map"></div>
+		
+		</main>
+		
+		<!-- Contenido de las pestañas fuera del h1 -->
+			<div id="About Me" class="tabcontent">
+			  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+			   <div class="profile">
+               <h1 style="text-align:center; margin-top:0px;">About Me</h1>
+               <div style="display: flex; align-items: center; gap: 15px; margin-top: 0px;">
+					<img src="https://m.media-amazon.com/images/I/41jLBhDISxL._UF1000,1000_QL80_.jpg" style="width:100px; border-radius:8px;">
+					<p style="margin:0; line-height:1.4;">
+						Sullivan is a geoinformation and geomatics engineer.<br>
+						He specializes in GIS, Python scripting, and spatial analysis.<br>
+						Passionate about helping others solve geospatial problems.<br>
+						Always exploring new tools and technologies in geodata.
+					</p>
+				</div>
+            </div> 
+			</div>
+
+			<div id="Paris" class="tabcontent">
+			  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+			  <h1 style="margin-left:20px;">
+			  <a href="https://www.linkedin.com/in/arnau-sol%C3%A0-7a11232a5/">
+				<img  src= "https://orquestamedia.com/wp-content/uploads/2025/10/Orquesta-Media-Post-blog-5.png" style="width:95px">
+				</a>
+			</h1>
+			</div>
+
+			<div id="Tokyo" class="tabcontent">
+			  <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+			  <div class="segunda" style="margin-left: 20px;">
+				<table>
+					<tr>
+						<th>App</th>
+						<th>Source</th>
+						<th>Uso</th>
+					</tr>
+					<tr>
+						<td>QGIS</td>
+						<td>Free</td>
+						<td>GIS with a lot of plugins</td>
+					</tr>
+					<tr>
+						<td>ArcGISPro</td>
+						<td>Payment</td>
+						<td>GIS (the best one in the market)</td>
+					</tr>
+					<tr>
+						<td>Python</td>
+						<td>Free</td>
+						<td>Development with GIS</td>
+					</tr>
+				</table>
+			</div>
+			</div>
+			
+		<footer>
+			  <p style="font-size:25px; font-weight:bold; letter-spacing:1px; text-align: center;">
+				“Nothing great was ever achieved without enthusiasm.”
+			  </p>
+			  <p class="final">
+				<a href="https://www.linkedin.com/in/arnau-sol%C3%A0-7a11232a5/">LinkedIn</a> |
+				<a href="https://github.com/dashboard">GitHub</a>
+			  </p>
+			</footer>
+
+   <script> 
+		var map = L.map('map')
+		  .setView([41.3851, 2.1734], 15); 
+		  
+		  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+		}).addTo(map);
+		
+		function openCity(evt, cityName) {
+		  var i, tabcontent, tablinks;
+		  tabcontent = document.getElementsByClassName("tabcontent");
+		  for (i = 0; i < tabcontent.length; i++) {
+			tabcontent[i].style.display = "none";
+		  }
+		  tablinks = document.getElementsByClassName("tablinks");
+		  for (i = 0; i < tablinks.length; i++) {
+			tablinks[i].className = tablinks[i].className.replace(" active", "");
+		  }
+		  document.getElementById(cityName).style.display = "block";
+		  evt.currentTarget.className += " active";
+		}
+
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+		// Get the element with id="defaultOpen" and click on it
+		
+		
+		</script>
+   </body>
+</html>
