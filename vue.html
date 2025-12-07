@@ -1,0 +1,108 @@
+<html>
+<head>
+    <title>Repositorio Sullivan</title>
+
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            margin: 0;
+            background: #f7f7f7;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 2%;
+            font-size: 2.2rem;
+        }
+
+        /* CONTENEDOR GRID */
+        .fotos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* TARJETA */
+        .superficie {
+            background-color: #ffffff;
+            border-radius: 18px;
+            padding: 5%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: 0.25s ease;
+        }
+
+        .superficie:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+            transform: translateY(-6px) scale(1.03);
+        }
+
+        /* IMAGEN */
+        .superficie img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        figcaption {
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        a {
+            font-size: 1rem;
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<h1>Repositorio Sullivan Enlaces</h1>
+
+<div id="fotos">
+    <div class="fotos">
+        <figure v-for="x in enlaces" :class="superficie_fotos">
+            <img :src="x.url2" alt="">
+            <figcaption>
+                {{ x.nom }} <br>
+                <a :href="x.url1" target="_blank">Enllaç al repositori</a>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+const fotos = Vue.createApp({
+    data() {
+        return {
+            enlaces: [
+                {nom: 'Visor TFG', url1:'https://github.com/arnau2112/Visor_TFG_C-diz', url2:'https://res-1.cloudinary.com/gorealtravel/image/upload/,f_auto,q_50/v1712673391/production/marketing/city/661521c44979ab01eaee6e26/city_main_image/sagrada-familia-small.webp'},
+                {nom: 'Calculadora velocitat TFG', url1:'https://github.com/arnau2112/Caculadora_Velocidad_Tsunami_TFG', url2:'https://sitgesluxuryrentals.com/wp-content/uploads/2017/05/barcelona1.jpg'},
+                {nom: 'Plugin afegir fotos QGIS', url1:'https://github.com/arnau2112/Plugin-Add-Photos-QGIS', url2:'https://static.independent.co.uk/2024/11/27/16/iStock-875273240.jpg'},
+                {nom: 'Calculadora escales', url1:'https://github.com/arnau2112/Calculadora_Escales', url2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH_poMR8imSwxvSAqUCQa_LO9D5VZWxSpgg&s'},
+                {nom: 'Repositori Sullivan', url1:'https://github.com/arnau2112/Repositorio_Sullivan', url2:'https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/royal/ports-and-destinations/destinations/spain-portugal-canary-islands/aerial-view-barcelona-beach-city-during-sunrise-spain.jpg?$800x450$'}
+            ],
+            superficie_fotos: "superficie"
+        }
+    }
+})
+
+fotos.mount('#fotos')
+</script>
+
+</body>
+</html>
