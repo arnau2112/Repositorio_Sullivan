@@ -6,7 +6,8 @@
         body {
             font-family: "Times New Roman", serif;
             margin: 0;
-            background: #f7f7f7;
+            background-color:rgb(241, 216, 183);
+              
         }
 
         h1 {
@@ -63,15 +64,49 @@
         a:hover {
             text-decoration: underline;
         }
+
+        .sidebar {
+            background-color: bisque;
+            border: 1px;
+            margin-right: 94%;
+            padding: 1%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .titulo {
+            background-color: #ffffff;
+            border-radius: 18px;
+            padding: 0.5%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: auto;
+            margin-top: 2%;
+            margin-bottom: 2%;
+        }
     </style>
 
 </head>
 
 <body>
 
-<h1>Repositorio Sullivan Enlaces</h1>
+<div id="titulos">
+  
+  <div>
+    <h1 class="titulo">Repositorio Sullivan Enlaces</h1>
+  </div>
+  
+</div>
+
 
 <div id="fotos">
+    <div style="margin-left:3%">
+        <div v-on:click="click = !click" class="sidebar">Sidebar</div>
+            <p v-if="click" style=" background-color: antiquewhite; margin-right: 94%; text-align: center; border-radius: 10px; margin-top: 0%;">
+                    <a v-for="y in sidebar" style="color: black; font-weight: lighter;" ><br>{{ y }}</a>   
+            </p>
+        </div>
+    
     <div class="fotos">
         <figure v-for="x in enlaces" :class="superficie_fotos">
             <img :src="x.url2" alt="">
@@ -96,12 +131,26 @@ const fotos = Vue.createApp({
                 {nom: 'Calculadora escales', url1:'https://github.com/arnau2112/Calculadora_Escales', url2:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLH_poMR8imSwxvSAqUCQa_LO9D5VZWxSpgg&s'},
                 {nom: 'Repositori Sullivan', url1:'https://github.com/arnau2112/Repositorio_Sullivan', url2:'https://assets.dm.rccl.com/is/image/RoyalCaribbeanCruises/royal/ports-and-destinations/destinations/spain-portugal-canary-islands/aerial-view-barcelona-beach-city-during-sunrise-spain.jpg?$800x450$'}
             ],
-            superficie_fotos: "superficie"
+            superficie_fotos: "superficie",
+            sidebar : ["Python", "Vue.js", "QGIS", "TFG"],
+            click: false
         }
     }
 })
 
+const titulos = Vue.createApp({
+    data() {
+        return {
+            titulo: ["About me", "Geoinformación","Codes"]
+        }
+    }
+})
+
+
+
 fotos.mount('#fotos')
+titulos.mount('#titulos')
+
 </script>
 
 </body>
